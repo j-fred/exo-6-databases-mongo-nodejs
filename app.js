@@ -4,7 +4,7 @@ const bodyParser = require('body-parser');
 const MongoClient = require('mongodb').MongoClient;
 const url = "mongodb://localhost:27017/";
 
-const port = 3009;
+const port = 5009;
 
 app.use("/static", express.static('static'));
 // parse application/x-www-form-urlencoded
@@ -115,6 +115,28 @@ app.post('/personne/:id', function (req, res) {
 
   res.end("doc màj");
 });
+
+
+/**
+ * Route del d'un doc via le formulaire 
+ */
+// app.post('/del/:id', function (req, res) {
+//   const _id = req.params.id;
+
+//   MongoClient.connect(url, function (err, db) {
+//     if (err) throw err;
+//     var dbo = db.db("jfred");
+//     var myquery = {
+//       _id: _id
+//     };
+//     dbo.collection("customers").deleteOne(myquery, function (err, obj) {
+//       if (err) throw err;
+//       console.log("1 document deleted");
+//       db.close();
+//     });
+//   });
+//   res.sendFile(__dirname + '/index.html');
+// });
 /**
  * Port d'écoute du serveur
  */

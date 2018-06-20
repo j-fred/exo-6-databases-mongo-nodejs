@@ -1,5 +1,5 @@
 $(function () {
-    var port = 3009
+    var port = 5009
 /* Find au chargement**/
     $.ajax({
         url: 'http://localhost:' + port + '/find',
@@ -18,6 +18,7 @@ $(function () {
 
 /* maj user au clic**/
     $('#maj').click(function () {
+        e.preventDefault;
         const _id = $('#_id').val();
         const nom = $('#name').val();
         const genre = $('#genre').val();

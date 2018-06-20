@@ -1,5 +1,6 @@
 <!doctype html>
 <html lang="fr">
+
 <head>
     <title>Agenda</title>
     <!-- Required meta tags -->
@@ -15,28 +16,28 @@
 <body class="text-center container">
     <div class="display-3">Users</div>
     <form class="form-signin" id="form">
-            <h1 class="h3 mb-3 font-weight-normal">Additionner</h1>
-            <div class="row">
-                <div class="col-md-6 mb-3">
-                    <label for="nb1">Nom</label>
-                    <input type="text" class="form-control text-center" id="name" name="name" placeholder="Votre nom" value="" required autofocus>
-                    <div class="invalid-feedback">
-                        Champs obligatoire.
-                    </div>
-                </div>
-                <div class="col-md-6 mb-3">
-                    <label for="nb2">Genre</label>
-                    <input type="text" class="form-control text-center" id="genre" name="genre" placeholder="M ou F" value="" required>
-                    <div class="invalid-feedback">
-                        Champs obligatoire.
-                    </div>
+        <h1 class="h3 mb-3 font-weight-normal">Additionner</h1>
+        <div class="row">
+            <div class="col-md-6 mb-3">
+                <label for="nb1">Nom</label>
+                <input type="text" class="form-control text-center" id="name" name="name" placeholder="Votre nom" value="" required autofocus>
+                <div class="invalid-feedback">
+                    Champs obligatoire.
                 </div>
             </div>
-            <button class="btn btn-lg btn-primary btn-block" id="add">add user</button>
-        </form>
+            <div class="col-md-6 mb-3">
+                <label for="nb2">Genre</label>
+                <input type="text" class="form-control text-center" id="genre" name="genre" placeholder="M ou F" value="" required>
+                <div class="invalid-feedback">
+                    Champs obligatoire.
+                </div>
+            </div>
+        </div>
+        <button class="btn btn-lg btn-primary btn-block" id="add">add user</button>
+    </form>
     <ul id="list" class=" mt-5"></ul>
-    
 
+<a href="#" class="bouton" id="aaa">aaaa</a>
     <!-- Optional JavaScript -->
     <!-- clé API de Jean-Fred :  AIzaSyCU7TrL1XhvGDzxUIwQHhDTYj6xsdRnhN0 -->
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCU7TrL1XhvGDzxUIwQHhDTYj6xsdRnhN0"></script>
@@ -47,6 +48,14 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
         crossorigin="anonymous"></script>
     <script src="static/js/script.js"></script>
+    <script>
+        // $(function () {
+        //     $('a.bouton').click(function () {
+        //         var id = $(this).attr('id');
+        //         alert(id);
+        //     });
+        // });
+    </script>
 </body>
 
 </html>
