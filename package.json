@@ -1,0 +1,24 @@
+{
+  "name": "exo-6-databases-mongo-nodejs",
+  "version": "1.0.0",
+  "description": "Exo-6-databases-mongo-nodejs Utilisation d'une base de données mongodb avec nodejs",
+  "main": "app.js",
+  "dependencies": {
+    "express": "^4.16.3",
+    "mongodb": "^3.0.10"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/j-fred/exo-6-databases-mongo-nodejs.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/j-fred/exo-6-databases-mongo-nodejs/issues"
+  },
+  "homepage": "https://github.com/j-fred/exo-6-databases-mongo-nodejs#readme"
+}
