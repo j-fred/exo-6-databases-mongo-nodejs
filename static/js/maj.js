@@ -7,7 +7,7 @@ $(function () {
         success: function (data) {
             $('#list').html();
             $.each(data, function (i, d) {
-                $('#list').append('<div>' + d._id +' - Nom : ' + d.name + ' | Genre : ' + genre(d.genre) + '<a href="#" id='+d._id+'> ( X Supprimer ) </a></div>');
+                $('#list').append('<div><a href="#" id=id_'+d._id+'> '+d._id+'</a> - Nom : ' + d.name + ' | Genre : ' + genre(d.genre) + '</div>');
             });
         },
         error: function (e) {
@@ -16,14 +16,16 @@ $(function () {
     });
 
 
-/* add user au clic**/
-    $('#add').click(function () {
+/* maj user au clic**/
+    $('#maj').click(function () {
+        const _id = $('#_id').val();
         const nom = $('#name').val();
         const genre = $('#genre').val();
         $.ajax({
-            url: 'http://localhost:' + port + '/add',
+            url: 'http://localhost:' + port + '/personne/'+_id,
             type: 'POST',
             data: {
+                _id: _id,
                 nom: nom,
                 genre: genre
             },
@@ -39,7 +41,7 @@ $(function () {
 });
 
 function genre(g) {
-    if (g == "m") {
+    if (g == "m" || g == "M") {
         return "Masculin";
     } else {
         return "Féminin";
