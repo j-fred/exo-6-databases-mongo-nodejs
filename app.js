@@ -1,27 +1,22 @@
 const express = require("express");
-const app = express();
 const bodyParser = require('body-parser');
+const mongodb = require('mongodb');
 const MongoClient = require('mongodb').MongoClient;
+const assert = require('assert');
+
+
+const app = express();
 const url = "mongodb://localhost:27017/";
 
-const port = 5009;
+const port = 3009;
 
 app.use("/static", express.static('static'));
 // parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({
-  extended: true
+  extended: false
 }));
 var tab = [];
 
-MongoClient.connect(url, function (err, database) {
-  if (err) throw err;
-  database.db("jfred").collection("personnages").find().toArray(function (err, result) {
-    if (err) throw err;
-    console.log(result);
-    tab = result;
-    database.close();
-  });
-});
 
 /**
  * Route vers index.html 
@@ -34,6 +29,15 @@ app.get('/', function (req, res) {
  * Route pour afficher les documents de la base de donnée
  */
 app.get('/find', function (req, res) {
+  MongoClient.connect(url, function (err, database) {
+    if (err) throw err;
+    database.db("jfred").collection("personnages").find().toArray(function (err, result) {
+      if (err) throw err;
+      // console.log(result);
+      tab = result;
+      database.close();
+    });
+  });
   res.json(tab);
 });
 
@@ -54,7 +58,7 @@ app.post('/add', function (req, res) {
       console.log("1 document ajouté");
       database.close();
     });
-    res.end("C'est bon");
+    res.end("C'est bon " + nom + " | " + genre);
   });
 });
 
@@ -66,31 +70,11 @@ app.get('/maj', function (req, res) {
   res.sendFile(__dirname + '/maj.html');
 });
 
-/**
- * Route maj d'un doc via le formulaire 
- */
-// app.get('/personne/:id', function (req, res) {
-//   const _id = req.params.id;
-//   const nom = req.body.nom;
-//   const genre = req.body.genre;
-//   MongoClient.connect(url, function (err, database) {
-//     if (err) throw err;
-//     database.db("jfred").collection("personnages").find({}).toArray(function (err, result) {
-//       if (err) throw err;
-//       //console.log(result);
-//       tab = result;
-//       database.close();
-//     });
-//   });
-//   res.end("doc màj");
-// });
-
-
 
 /**
  * Route maj d'un doc via le formulaire 
  */
-app.post('/personne/:id', function (req, res) {
+app.put('/personne/:id', function (req, res) {
   const _id = req.params.id;
   const nom = req.body.nom;
   const genre = req.body.genre;
@@ -112,7 +96,6 @@ app.post('/personne/:id', function (req, res) {
       database.close();
     });
   });
-
   res.end("doc màj");
 });
 
@@ -120,23 +103,24 @@ app.post('/personne/:id', function (req, res) {
 /**
  * Route del d'un doc via le formulaire 
  */
-// app.post('/del/:id', function (req, res) {
-//   const _id = req.params.id;
+app.delete('/personne/:id', function (req, res) {
+  const _id = req.params.id;
 
-//   MongoClient.connect(url, function (err, db) {
-//     if (err) throw err;
-//     var dbo = db.db("jfred");
-//     var myquery = {
-//       _id: _id
-//     };
-//     dbo.collection("customers").deleteOne(myquery, function (err, obj) {
-//       if (err) throw err;
-//       console.log("1 document deleted");
-//       db.close();
-//     });
-//   });
-//   res.sendFile(__dirname + '/index.html');
-// });
+  MongoClient.connect(url, function (err, database) {
+    if (err) throw err;
+    var myquery = {
+      _id: mongodb.ObjectId(_id)
+    };
+    database.db("jfred").collection("personnages").deleteOne(myquery, function (err, obj) {
+      assert.equal(null, err);
+      if (err) throw err;
+     // console.log(obj);
+      database.close();
+    });
+  });
+    
+  res.end("id= " + _id + " supprimé");
+});
 /**
  * Port d'écoute du serveur
  */
